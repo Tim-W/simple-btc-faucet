@@ -2,8 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const { exec } = require("child_process");
+let listOfAddresses = []
 
 function generateAndSendMoney(id, amount) {
+    if (listOfAddresses.includes(id)) {
+        return console.log(`${id} is already used`)
+    }
+    listOfAddresses.push(id)
     exec(`bitcoin-cli -regtest sendtoaddress ${id} ${amount}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`error: ${error.message}`);
@@ -34,8 +39,8 @@ router.get('/', function (req, res, next) {
     if (!id) {
         return res.render('index', {title: 'No ID found'});
     }
-    // Send the money here
-    const message = generateAndSendMoney(id, 10)
+    // Send the money
+    generateAndSendMoney(id, 10)
     return res.render('index', {title: id});
 });
 
