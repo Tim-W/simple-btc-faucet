@@ -35,7 +35,7 @@ router.get('/', function (req, res, next) {
         return res.render('index', {title: 'No ID found'});
     }
     // Send the money here
-    const message = generateAndSendMoney(id, 1)
+    const message = generateAndSendMoney(id, 10)
     return res.render('index', {title: id});
 });
 
