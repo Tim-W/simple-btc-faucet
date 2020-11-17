@@ -9,7 +9,7 @@ function generateAndSendMoney(id, amount) {
         return console.log(`${id} is already used`)
     }
     listOfAddresses.push(id)
-    exec(`bitcoin-cli -regtest sendtoaddress ${id} ${amount}`, (error, stdout, stderr) => {
+    exec(`~/bitcoin-0.17.1/bin/bitcoin-cli -regtest sendtoaddress ${id} ${amount}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`error: ${error.message}`);
             return error.message
@@ -20,7 +20,7 @@ function generateAndSendMoney(id, amount) {
         }
         console.log(`stdout: ${stdout}`);
     });
-    exec(`bitcoin-cli -regtest generate 1`, (error, stdout, stderr) => {
+    exec(`~/bitcoin-0.17.1/bin/bitcoin-cli -regtest generate 1`, (error, stdout, stderr) => {
         if (error) {
             console.error(`error: ${error.message}`);
             return error.message
